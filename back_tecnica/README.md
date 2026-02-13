@@ -1,59 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# API de Gestión de Pacientes
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descripción
+Este proyecto es una API REST construida con **Laravel 12** para la gestión de información de pacientes, incluyendo sus datos personales, tipo de documento, género y ubicación geográfica (departamento y municipio).
+Expone un api para la manipulacion de los pacientes
 
-## About Laravel
+## Requisitos Previos
+* PHP >= 8.2
+* Composer
+* MySQL o MariaDB
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Instalación
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1.  **Clonar el repositorio:**
+    si no ha hecho este paso como indica el readme general, asegurese de hacerlo
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2.  **Instalar dependencias:**
+    ubicarse en la carpeta back_tecnica y usar el comando
+    ```bash
+    composer install
+    ```
+3.  **Base de datos:**
+    crea una base de datos mysql con los parametros:
+    ```
+    DB_HOST=127.0.0.1 || localhost
+    DB_PORT=3306
+    DB_DATABASE=pacientes
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-## Learning Laravel
+4.  **Configurar entorno:**
+    Copia el archivo `.env.example` a `.env` y configura las credenciales de tu base de datos:
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1 || localhost
+    DB_PORT=3306
+    DB_DATABASE=pacientes
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
+5.  **Ejecutar migraciones:**
+    ```bash
+    php artisan migrate
+    ```
+6.  **Ejecutar seeder:**
+    ```bash
+    php artisan db:seed
+    ```
+7.  **Correr el servidor:**
+    ```bash
+    php artisan serve
+    ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Endpoints de la API
+El api expone los siguentes endpoints
+### Pacientes
+* **GET** `localhost/api/pacientes`: Obtiene la lista de todos los pacientes.
+* **GET** `localhost/api/pacientes/{id}`: Recupera un paciente basado en el id del sistema.
+* **GET** `localhost/api/pacientes/documento/{id}`: Recupera un paciente basado en el numero de identificacion ciudadano.
+* **POST** `localhost/api/pacientes`: Crea un nuevo paciente.
+    * *Payload:*
+        ```json
+        {
+            "tipo_documento_id": 1,
+            "numero_documento": "12345678",
+            "nombre1": "Juan",
+            "apellido1": "Pérez",
+            "genero_id": 1,
+            "departamento_id": 1,
+            "municipio_id": 1,
+            "correo": "juan@example.com"
+        }
+        ```
+* **PUT** `localhost/api/pacientes/{id}`: Actualiza la informacion de un paciente identificado con id.
+    * *Payload:*
+        ```json
+        {
+            "tipo_documento_id": 1,
+            "numero_documento": "12345678",
+            "nombre1": "Juan",
+            "apellido1": "Pérez",
+            "genero_id": 1,
+            "departamento_id": 1,
+            "municipio_id": 1,
+            "correo": "juan@example.com"
+        }
+        ```
+* **DELETE** `localhost/api/pacientes/{id}`: Crea un nuevo paciente.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Tecnologías Utilizadas
+* Laravel 12.51.0
+* MySQL
+* PHP 8.5.3

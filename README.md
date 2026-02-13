@@ -1,56 +1,39 @@
-# API de Gestión de Pacientes
+# Sistema de Gestión de Pacientes
 
-## Descripción
-Este proyecto es una API REST construida con **Laravel 12** para la gestión de información de pacientes, incluyendo sus datos personales, tipo de documento, género y ubicación geográfica (departamento y municipio).
-Expone un api para la manipulacion de los pacientes
+Este proyecto integral permite la gestión de información de pacientes, incluyendo sus datos personales, tipo de documento, género y ubicación geográfica (departamento y municipio).
 
-## Requisitos Previos
+El sistema se divide en dos partes principales: un **Backend API** y un **Frontend SPA**.
+
+## 🏗️ Arquitectura del Proyecto
+
+```text
+/
+├── back_tecnica/   # API REST construida con Laravel
+└── front_tecnia/  # Aplicación SPA construida con Angular
+```
+
+## Guia de instalacion y ejecucion
+Puede ejecutar el servidor back_tecnica independientemente, pero si desea una ejecucion integral siga los pasos para cada componente.
+
+### 1. Descarga
+Use el comando de git para obtener en su sistema local todo el contenido del repositorio
+```bash
+    git clone: https://github.com/edynsonmj/tecnica_sinergia.git
+```
+
+### 2. Backed (API Laravel - PHP)
+dirijase a la carpeta /back_tecnica para configurar la base de datos y el servidor previo a la ejecucion
+[ver documentacion back_tecnica](back_tecnica/README.md)
+
+### 3. Frontend (Aplicación Angular)
+Una vez el Backend esté funcionando, diríjase a la carpeta /front_sinergia para instalar las dependencias de Node.js y levantar el servidor web.
+[ver documentacion back_tecnica](front_sinergia/README.md)
+
+## Requisitos
 * PHP >= 8.2
-* Composer
 * MySQL o MariaDB
-
-## Instalación
-
-1.  **Clonar el repositorio:**
-    ```bash
-    git clone <URL_DEL_REPOSITORIO>
-    ```
-2.  **Instalar dependencias:**
-    ```bash
-    composer install
-    ```
-3.  **Base de datos:**
-    crea una base de datos mysql con los parametros:
-    ```
-    DB_HOST=127.0.0.1 || localhost
-    DB_PORT=3306
-    DB_DATABASE=pacientes
-    DB_USERNAME=root
-    DB_PASSWORD=
-    ```
-
-4.  **Configurar entorno:**
-    Copia el archivo `.env.example` a `.env` y configura las credenciales de tu base de datos:
-    ```env
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1 || localhost
-    DB_PORT=3306
-    DB_DATABASE=pacientes
-    DB_USERNAME=root
-    DB_PASSWORD=
-    ```
-5.  **Ejecutar migraciones:**
-    ```bash
-    php artisan migrate
-    ```
-6.  **Ejecutar seeder:**
-    ```bash
-    php artisan db:seed
-    ```
-7.  **Correr el servidor:**
-    ```bash
-    php artisan serve
-    ```
+* NodeJs
+* Angular/cli
 
 ## Endpoints de la API
 
@@ -88,7 +71,5 @@ Expone un api para la manipulacion de los pacientes
         ```
 * **DELETE** `localhost/api/pacientes/{id}`: Crea un nuevo paciente.
 
-## Tecnologías Utilizadas
-* Laravel 12.51.0
-* MySQL
-* PHP 8.5.3
+## Vistas de la pagina
+* **Listado pacientes** : Muestra la lista de todos los pacientes.
