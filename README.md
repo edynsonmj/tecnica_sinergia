@@ -23,11 +23,11 @@ Use el comando de git para obtener en su sistema local todo el contenido del rep
 
 ### 2. Backed (API Laravel - PHP)
 dirijase a la carpeta /back_tecnica para configurar la base de datos y el servidor previo a la ejecucion
-[ver documentacion back_tecnica](back_tecnica/README.md)
+[ver documentacion back_tecnica](back_tecnica)
 
 ### 3. Frontend (Aplicación Angular)
 Una vez el Backend esté funcionando, diríjase a la carpeta /front_sinergia para instalar las dependencias de Node.js y levantar el servidor web.
-[ver documentacion back_tecnica](front_sinergia/README.md)
+[ver documentacion front_sinergia](front_sinergia)
 
 ## Requisitos
 * PHP >= 8.2
