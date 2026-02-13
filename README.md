@@ -1,5 +1,7 @@
 # Sistema de Gestión de Pacientes
 
+![imagen web](imagen.png)
+
 Este proyecto integral permite la gestión de información de pacientes, incluyendo sus datos personales, tipo de documento, género y ubicación geográfica (departamento y municipio).
 
 El sistema se divide en dos partes principales: un **Backend API** y un **Frontend SPA**.
