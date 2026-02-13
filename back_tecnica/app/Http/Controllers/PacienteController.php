@@ -15,16 +15,39 @@ class PacienteController extends Controller
      */
     public function index()
     {
+        print 'index';
         return Paciente::with(['tipoDocumento', 'genero', 'departamento', 'municipio'])->get();
     }
 
+    /**
+     * retorna un paciente consultando el id del sistema
+     */
+    public function show($id){
+        print 'show';
+        return Paciente::with(['tipoDocumento', 'genero', 'departamento', 'municipio' ])->findOrFail($id);
+    }
+
+    /**
+     * retorna un paciente consultado el numero de identificacion del paciente
+     */
+    public function showByDocumento($id){
+        print 'showByDocumento';
+        $paciente = Paciente::with(['tipoDocumento', 'genero', 'departamento', 'municipio' ])
+            ->where('numero_documento', $id)
+            ->firstOrFail();
+        return $paciente;
+    }
+
+    /**
+     * guarda un paciente en el sistema
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'tipo_documento_id' => 'required|exists:tipo_documentos,id',
             'numero_documento' => 'required|unique:pacientes',
-            'nombre1' => 'required|string',
-            'apellido1' => 'required|string',
+            'nombre1' => 'required|string|max:50',
+            'apellido1' => 'required|string|max:50',
             'genero_id' => 'required|exists:generos,id',
             'departamento_id' => 'required|exists:departamentos,id',
             'municipio_id' => 'required|exists:municipios,id',
@@ -35,42 +58,31 @@ class PacienteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * actualiza un paciente en el sistema
      */
-    public function create()
-    {
-        //
+    public function update(Request $request, $id){
+        $paciente = Paciente::findOrFail($id);
+        $validatedData = $request->validate([
+            'tipo_documento_id' => 'required|exists:tipo_documentos,id',
+            //'numero_documento' => 'required|unique:pacientes',
+            'nombre1' => 'required|string|max:50',
+            'apellido1' => 'required|string|max:50',
+            'genero_id' => 'required|exists:generos,id',
+            'departamento_id' => 'required|exists:departamentos,id',
+            'municipio_id' => 'required|exists:municipios,id',
+            'correo' => 'required|email',
+        ]);
+
+        $paciente->update($validatedData);
+        return $paciente;
     }
 
     /**
-     * Display the specified resource.
+     * elimina un paciente del sistema
      */
-    public function show(Paciente $paciente)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Paciente $paciente)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Paciente $paciente)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Paciente $paciente)
-    {
-        //
+    public function destroy($id){
+        $paciente = Paciente::findOrFail($id);
+        $paciente->delete();
+        return response()->json(['message'=>'Paciente eliminado']);
     }
 }
