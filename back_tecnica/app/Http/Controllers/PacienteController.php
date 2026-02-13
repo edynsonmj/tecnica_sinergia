@@ -15,7 +15,6 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        print 'index';
         return Paciente::with(['tipoDocumento', 'genero', 'departamento', 'municipio'])->get();
     }
 
@@ -23,7 +22,6 @@ class PacienteController extends Controller
      * retorna un paciente consultando el id del sistema
      */
     public function show($id){
-        print 'show';
         return Paciente::with(['tipoDocumento', 'genero', 'departamento', 'municipio' ])->findOrFail($id);
     }
 
@@ -31,7 +29,6 @@ class PacienteController extends Controller
      * retorna un paciente consultado el numero de identificacion del paciente
      */
     public function showByDocumento($id){
-        print 'showByDocumento';
         $paciente = Paciente::with(['tipoDocumento', 'genero', 'departamento', 'municipio' ])
             ->where('numero_documento', $id)
             ->firstOrFail();
